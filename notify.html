@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Set a Notification</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, button {
+      padding: 8px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📅 Set a Custom Notification</h2>
+  <form id="scheduleForm">
+    <label>
+      Notification Title:
+      <input type="text" id="reminderTitle" required>
+    </label>
+    <label>
+      Notification Date:
+      <input type="date" id="reminderDate" required>
+    </label>
+    <label>
+      Notification Time:
+      <input type="time" id="reminderTime" required>
+    </label>
+    <button type="submit">Schedule Notification</button>
+  </form>
+
+  <h3>⏰ Scheduled Notifications</h3>
+  <ul id="notificationList"></ul>
+
+  <script>
+    let scheduledNotifications = [];
+  
+    // Load saved notifications
+    if (localStorage.getItem("scheduledNotifs")) {
+      scheduledNotifications = JSON.parse(localStorage.getItem("scheduledNotifs"));
+    }
+  
+    const listEl = document.getElementById("notificationList");
+  
+    function renderScheduledList() {
+      listEl.innerHTML = "";
+      scheduledNotifications.forEach(n => {
+        const li = document.createElement("li");
+        li.textContent = `${n.title} — ${new Date(n.dateTime).toLocaleString()}`;
+        listEl.appendChild(li);
+      });
+    }
+  
+    renderScheduledList();
+  
+    // Create a section to show live notifications
+    const liveContainer = document.createElement("div");
+    liveContainer.id = "liveNotifications";
+    liveContainer.style.marginTop = "30px";
+    liveContainer.innerHTML = `<h3>🔔 Live Notifications</h3><div id="liveList"></div>`;
+    document.body.appendChild(liveContainer);
+  
+    // Display a message on the page
+    function showOnPageNotification(title, timeText) {
+      const liveList = document.getElementById("liveList");
+      const alertBox = document.createElement("div");
+      alertBox.style.backgroundColor = "#ffeeba";
+      alertBox.style.border = "1px solid #f0ad4e";
+      alertBox.style.padding = "10px";
+      alertBox.style.marginTop = "10px";
+      alertBox.style.borderRadius = "5px";
+      alertBox.innerHTML = `<strong>${title}</strong><br><small>${timeText}</small>`;
+      liveList.appendChild(alertBox);
+    }
+  
+    // Request permission on load
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission();
+    }
+  
+    document.getElementById("scheduleForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const title = document.getElementById("reminderTitle").value;
+      const date = document.getElementById("reminderDate").value;
+      const time = document.getElementById("reminderTime").value;
+  
+      const dateTime = new Date(`${date}T${time}`);
+  
+      if (dateTime < new Date()) {
+        alert("Please pick a future date/time.");
+        return;
+      }
+  
+      scheduledNotifications.push({ title, dateTime: dateTime.toISOString() });
+      localStorage.setItem("scheduledNotifs", JSON.stringify(scheduledNotifications));
+      renderScheduledList();
+      alert("Notification scheduled!");
+      document.getElementById("scheduleForm").reset();
+    });
+  
+    // Check every minute for matching time
+    setInterval(() => {
+      const now = new Date();
+      scheduledNotifications = scheduledNotifications.filter(n => {
+        const target = new Date(n.dateTime);
+        const isNow =
+          now.getFullYear() === target.getFullYear() &&
+          now.getMonth() === target.getMonth() &&
+          now.getDate() === target.getDate() &&
+          now.getHours() === target.getHours() &&
+          now.getMinutes() === target.getMinutes();
+  
+        if (isNow) {
+          // Show browser notification if allowed
+          if (Notification.permission === "granted") {
+            new Notification(`🔔 ${n.title}`, {
+              body: `Scheduled for ${target.toLocaleTimeString()}`,
+              icon: 'https://cdn-icons-png.flaticon.com/512/1827/1827392.png'
+            });
+          }
+  
+          // Show on-page notification
+          showOnPageNotification(n.title, `Triggered at ${now.toLocaleTimeString()}`);
+          return false; // remove after showing
+        }
+  
+        return true;
+      });
+  
+      localStorage.setItem("scheduledNotifs", JSON.stringify(scheduledNotifications));
+      renderScheduledList();
+    }, 60 * 1000); // every minute
+  </script>
+  
+</body>
+</html>

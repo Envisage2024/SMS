@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stock Management - Sickbay Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="images/logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="sidebar">
+      <div class="logo">
+        <img src="images/logo.png" width="50" height="50">
+        <span>Sickbay MS</span>
+      </div>
+      <nav class="nav-menu">
+        <a href="dashboard.html" class="nav-item"><i class="fas fa-house"></i><span>Dashboard</span></a>
+        <a href="students.html" class="nav-item"><i class="fas fa-users"></i><span>Students</span></a>
+        <a href="prescriptions.html" class="nav-item"><i class="fas fa-prescription-bottle-alt"></i><span>Prescriptions</span></a>
+        <a href="stocks.html" class="nav-item active"><i class="fas fa-boxes"></i><span>Stock Management</span></a>
+        <a href="analytics.html" class="nav-item"><i class="fas fa-chart-line"></i><span>Analytics</span></a>
+        <a href="notes.html" class="nav-item"><i class="fas fa-sticky-note"></i><span>Notes</span></a>
+            <a href="chat bot.html" class="nav-item"><i class="fas fa-robot"></i><span>The Med Bot</span></a>
+        <a href="chat.html" class="nav-item"><i class="fas fa-envelope"></i><span>Chat-Room</span></a>
+        <a href="Locater.html" class="nav-item"><i class="fas fa-map"></i><span>GPS</span> </a>
+        <a href="about.html" class="nav-item"><i class="fas fas fa-phone"></i><span>About Us</span></a>
+        <a href="contact us.html" class="nav-item"><i class="fas fa-phone"></i><span>Contact Us</span></a>
+    
+        <a href="#" class="nav-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+      </nav>
+    </div>
+
+    <main class="main-content">
+      <header class="header">
+        <div class="page-header">
+          <h1>Stock Management</h1>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-primary" id="openAddStockBtn">
+            <i class="fas fa-plus"></i> Add Stock
+          </button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon bg-primary"><i class="fas fa-pills"></i></div>
+            <div class="stat-info"><h3 id="totalDrugs">0</h3><p>Total Drugs</p></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-success"><i class="fas fa-box"></i></div>
+            <div class="stat-info"><h3 id="totalStock">0</h3><p>Total Stock Units</p></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-warning"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="stat-info"><h3 id="lowStockCount">0</h3><p>Low Stock Alerts</p></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-info"><i class="fas fa-chart-line"></i></div>
+            <div class="stat-info"><h3 id="stockValue">UGX 0</h3><p>Total Stock Value</p></div>
+          </div>
+        </div>
+
+        <div class="stock-sections">
+          <!-- Low Stock Alerts -->
+          <div class="section-card low-stock-section">
+            <div class="section-header">
+              <h3><i class="fas fa-exclamation-triangle"></i> Low Stock Alerts</h3>
+              <span class="stock-filter">
+                <select id="lowStockFilter" onchange="filterLowStock()">
+                  <option value="all">All Items</option>
+                  <option value="critical">Critical (< 10)</option>
+                  <option value="low">Low (< 50)</option>
+                </select>
+              </span>
+            </div>
+            <div class="low-stock-list" id="lowStockList">
+              <!-- Low stock items will be populated here -->
+            </div>
+          </div>
+
+          <!-- Recently Added -->
+          <div class="section-card recent-stock-section">
+            <div class="section-header">
+              <h3><i class="fas fa-clock"></i> Recently Added</h3>
+              <span class="date-filter">
+                <input type="date" id="recentStockDate" onchange="filterRecentStock()">
+              </span>
+            </div>
+            <div class="recent-stock-list" id="recentStockList">
+              <!-- Recently added items will be populated here -->
+            </div>
+          </div>
+
+          <!-- All Stock Items -->
+          <div class="section-card all-stock-section">
+            <div class="section-header">
+              <h3><i class="fas fa-boxes"></i> All Stock Items</h3>
+              <div class="stock-controls">
+                <input type="text" id="stockSearch" placeholder="Search drugs..." onkeyup="searchStock()">
+                <select id="stockCategoryFilter" onchange="filterStock()">
+                  <option value="all">All Categories</option>
+                  <option value="analgesics">Analgesics</option>
+                  <option value="antibiotics">Antibiotics</option>
+                  <option value="antihistamines">Antihistamines</option>
+                  <option value="vitamins">Vitamins</option>
+                  <option value="other">Other</option>
+                </select>
+                <select id="stockStatusFilter" onchange="filterStock()">
+                  <option value="all">All Status</option>
+                  <option value="in-stock">In Stock</option>
+                  <option value="low-stock">Low Stock</option>
+                  <option value="out-of-stock">Out of Stock</option>
+                </select>
+              </div>
+            </div>
+            <div class="stock-grid" id="stockGrid">
+              <!-- Stock items will be populated here -->
+            </div>
+          </div>
+
+          <!-- Suppliers -->
+          <div class="section-card supplier-section">
+            <div class="section-header">
+              <h3><i class="fas fa-truck"></i> Suppliers</h3>
+            </div>
+            <div class="supplier-list" id="supplierList">
+              <!-- Supplier names and the number of drugs they worked on will be populated here -->
+            </div>
+          </div>
+        </div>
+        <div class="export-section">
+          <button class="btn btn-secondary" id="exportStocksBtn">
+            <i class="fas fa-download"></i> Export Stocks
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Stock Modal -->
+  <div class="modal" id="addStockModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add New Stock</h3>
+        <button class="modal-close" onclick="closeAddStockModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="addStockForm">
+          <div class="form-group">
+            <label for="drugName">Drug Name </label>
+            <input type="text" id="drugName" required>
+          </div>
+          <div class="form-group">
+            <label for="drugCategory">Category </label>
+            <select id="drugCategory" required>
+              <option value="">Select Category</option>
+              <option value="analgesics">Analgesics</option>
+              <option value="antibiotics">Antibiotics</option>
+              <option value="antihistamines">Antihistamines</option>
+              <option value="vitamins">Vitamins</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="drugQuantity">Quantity </label>
+            <input type="number" id="drugQuantity" required min="1">
+          </div>
+          <div class="form-group">
+            <label for="drugUnit">Unit</label>
+            <select id="drugUnit">
+              <option value="tablets">Tablets</option>
+              <option value="capsules">Capsules</option>
+              <option value="ml">ML</option>
+              <option value="mg">MG</option>
+              <option value="bottles">Bottles</option>
+              <option value="sachets">Sachets</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="drugPrice">Unit Price (UGX)</label>
+            <input type="number" id="drugPrice" step="0.01" min="0">
+          </div>
+          <div class="form-group">
+            <label for="lowStockThreshold">Low Stock Alert</label>
+            <input type="number" id="lowStockThreshold" min="1" value="20">
+          </div>
+          <div class="form-group">
+            <label for="expiryDate">Expiry Date</label>
+            <input type="date" id="expiryDate">
+          </div>
+          <div class="form-group">
+            <label for="supplier">Supplier</label>
+            <input type="text" id="supplier">
+          </div>
+          <div class="form-group">
+            <label for="drugDescription">Description</label>
+            <textarea id="drugDescription" rows="3"></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeAddStockModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add Stock</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase & Stock Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getFirestore, collection, query, onSnapshot, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBPbc82p3XWtzH0X4Ougj9MPeDiJF9vzYk",
+      authDomain: "sms-db-7b1c7.firebaseapp.com",
+      databaseURL: "https://sms-db-7b1c7-default-rtdb.firebaseio.com",
+      projectId: "sms-db-7b1c7",
+      storageBucket: "sms-db-7b1c7.appspot.com",
+      messagingSenderId: "848657966289",
+      appId: "1:848657966289:web:3d4ab0afabc6bc9b57d1f0",
+      measurementId: "G-45LBM5CTZ0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let allStockItems = [];
+
+    // Real-time listener for stock data
+    function listenToStockUpdates() {
+      const stockQuery = query(collection(db, "stocks"));
+
+      onSnapshot(stockQuery, (snapshot) => {
+        allStockItems = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        const lowStockItems = allStockItems.filter((item) => item.drugQuantity <= item.lowStockThreshold);
+        const recentStockItems = allStockItems.filter((item) => {
+          const createdAt = new Date(item.createdAt.seconds * 1000);
+          const now = new Date();
+          const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
+          return createdAt >= oneWeekAgo;
+        });
+
+        updateStatistics(allStockItems);
+        updateStockGrid(allStockItems);
+        updateLowStockList(lowStockItems);
+        updateRecentlyAddedList(recentStockItems);
+        updateSupplierList(allStockItems);
+      });
+    }
+
+    function updateStatistics(items) {
+      let totalDrugs = items.length;
+      let totalStockUnits = items.reduce((sum, item) => sum + item.drugQuantity, 0);
+      let lowStockCount = items.filter((item) => item.drugQuantity <= item.lowStockThreshold).length;
+      let totalStockValue = items.reduce((sum, item) => sum + item.drugQuantity * item.drugPrice, 0);
+
+      document.getElementById("totalDrugs").textContent = totalDrugs;
+      document.getElementById("totalStock").textContent = totalStockUnits;
+      document.getElementById("lowStockCount").textContent = lowStockCount;
+      document.getElementById("stockValue").textContent = `UGX ${totalStockValue.toFixed(2)}`;
+    }
+
+    function updateStockGrid(items) {
+      const stockGrid = document.getElementById("stockGrid");
+      stockGrid.innerHTML = items.map(
+        (item) => `<div>${item.drugName} - ${item.drugQuantity} ${item.drugUnit} - UGX ${item.drugPrice.toFixed(2)}</div>`
+      ).join("");
+    }
+
+    function updateLowStockList(items) {
+      const lowStockList = document.getElementById("lowStockList");
+      lowStockList.innerHTML = items.map(
+        (item) => `<div>${item.drugName} - ${item.drugQuantity} ${item.drugUnit}</div>`
+      ).join("");
+    }
+
+    function updateRecentlyAddedList(items) {
+      const recentStockList = document.getElementById("recentStockList");
+      recentStockList.innerHTML = items.map(
+        (item) => `<div>${item.drugName} - Added on ${new Date(item.createdAt.seconds * 1000).toLocaleDateString()}</div>`
+      ).join("");
+    }
+
+    function updateSupplierList(items) {
+      const supplierMap = items.reduce((map, item) => {
+        if (!map[item.supplier]) {
+          map[item.supplier] = 0;
+        }
+        map[item.supplier]++;
+        return map;
+      }, {});
+
+      const supplierList = document.getElementById("supplierList");
+      supplierList.innerHTML = Object.entries(supplierMap)
+        .map(([supplier, count]) => `<div class="supplier-card"><h4>${supplier}</h4><p>Drugs Supplied: ${count}</p></div>`)
+        .join("");
+    }
+
+    function searchStock() {
+      const searchTerm = document.getElementById("stockSearch").value.toLowerCase();
+      const filteredItems = allStockItems.filter((item) =>
+        item.drugName.toLowerCase().includes(searchTerm)
+      );
+      updateStockGrid(filteredItems);
+    }
+
+    function filterStock() {
+      const category = document.getElementById("stockCategoryFilter").value;
+      const status = document.getElementById("stockStatusFilter").value;
+
+      let filteredItems = [...allStockItems];
+
+      if (category !== "all") {
+        filteredItems = filteredItems.filter((item) => item.drugCategory === category);
+      }
+
+      if (status === "in-stock") {
+        filteredItems = filteredItems.filter((item) => item.drugQuantity > item.lowStockThreshold);
+      } else if (status === "low-stock") {
+        filteredItems = filteredItems.filter((item) => item.drugQuantity <= item.lowStockThreshold && item.drugQuantity > 0);
+      } else if (status === "out-of-stock") {
+        filteredItems = filteredItems.filter((item) => item.drugQuantity === 0);
+      }
+
+      updateStockGrid(filteredItems);
+    }
+
+    function filterLowStock() {
+      const filterValue = document.getElementById("lowStockFilter").value;
+      let filteredItems = allStockItems.filter((item) => item.drugQuantity <= item.lowStockThreshold);
+
+      if (filterValue === "critical") {
+        filteredItems = filteredItems.filter((item) => item.drugQuantity < 10);
+      } else if (filterValue === "low") {
+        filteredItems = filteredItems.filter((item) => item.drugQuantity < 50 && item.drugQuantity >= 10);
+      }
+
+      updateLowStockList(filteredItems);
+    }
+
+    function filterRecentStock() {
+      const selectedDate = new Date(document.getElementById("recentStockDate").value);
+      const filteredItems = allStockItems.filter((item) => {
+        const createdAt = new Date(item.createdAt.seconds * 1000);
+        return createdAt.toDateString() === selectedDate.toDateString();
+      });
+
+      updateRecentlyAddedList(filteredItems);
+    }
+
+    async function handleAddStock(event) {
+      event.preventDefault();
+
+      const drugName = document.getElementById('drugName').value.trim();
+      const drugCategory = document.getElementById('drugCategory').value;
+      const drugQuantity = parseInt(document.getElementById('drugQuantity').value, 10);
+      const drugUnit = document.getElementById('drugUnit').value;
+      const drugPrice = parseFloat(document.getElementById('drugPrice').value) || 0;
+      const lowStockThreshold = parseInt(document.getElementById('lowStockThreshold').value, 10);
+      const expiryDate = document.getElementById('expiryDate').value;
+      const supplier = document.getElementById('supplier').value.trim();
+      const drugDescription = document.getElementById('drugDescription').value.trim();
+
+      if (!drugName || !drugCategory || drugQuantity <= 0) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      const newStock = {
+        drugName,
+        drugCategory,
+        drugQuantity,
+        drugUnit,
+        drugPrice,
+        lowStockThreshold,
+        expiryDate,
+        supplier,
+        drugDescription,
+        createdAt: Timestamp.now()
+      };
+
+      try {
+        await addDoc(collection(db, "stocks"), newStock);
+        alert("Stock added successfully!");
+        document.getElementById("addStockForm").reset();
+        closeAddStockModal();
+      } catch (error) {
+        console.error("Error adding stock:", error);
+        alert("Failed to add stock: " + error.message);
+      }
+    }
+
+    function showAddStockModal() {
+      const modal = document.getElementById('addStockModal');
+      modal.style.display = 'block';
+    }
+
+    function closeAddStockModal() {
+      const modal = document.getElementById('addStockModal');
+      modal.style.display = 'none';
+    }
+
+    function exportStocksToTxt() {
+      let stockData = "Drug Name\tCategory\tQuantity\tUnit\tPrice (UGX)\tLow Stock Threshold\tSupplier\tDescription\n";
+      allStockItems.forEach((item) => {
+        stockData += `${item.drugName}\t${item.drugCategory}\t${item.drugQuantity}\t${item.drugUnit}\t${item.drugPrice.toFixed(2)}\t${item.lowStockThreshold}\t${item.supplier}\t${item.drugDescription}\n`;
+      });
+
+      const blob = new Blob([stockData], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "stocks.txt";
+      link.click();
+    }
+
+    document.getElementById("exportStocksBtn").addEventListener("click", exportStocksToTxt);
+
+    // Ensure event listeners are correctly attached
+    document.getElementById('openAddStockBtn').addEventListener('click', showAddStockModal);
+    document.querySelector('.modal-close').addEventListener('click', closeAddStockModal);
+    document.querySelector('.btn.btn-secondary').addEventListener('click', closeAddStockModal);
+
+    document.getElementById("stockSearch").addEventListener("keyup", searchStock);
+    document.getElementById("stockCategoryFilter").addEventListener("change", filterStock);
+    document.getElementById("stockStatusFilter").addEventListener("change", filterStock);
+    document.getElementById("lowStockFilter").addEventListener("change", filterLowStock);
+    document.getElementById("recentStockDate").addEventListener("change", filterRecentStock);
+    document.getElementById('openAddStockBtn').addEventListener('click', showAddStockModal);
+    document.getElementById('addStockForm').addEventListener('submit', handleAddStock);
+
+    listenToStockUpdates();
+  </script>
+</body>
+<script>
+  (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="XT4sIf0RblNVHj65UGHeN";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+  </script>
+</html>

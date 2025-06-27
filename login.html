@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - Sickbay Management System</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-header">
+        <div class="logo-large">
+            <img src="images/logo.png" width="50" height="50" />
+        </div>
+        <h1>Sickbay Management System</h1>
+        <p>Authentication Portal</p>
+    </div>
+        <div class="login-form">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required />
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required />
+                    <i class="fas fa-lock input-icon"></i>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+            </form>
+            <div class="error-message" id="errorMessage" style="color: red; margin-top: 10px;"></div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // ✅ Corrected config (removed loading animation-related properties)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPbc82p3XWtzH0X4Ougj9MPeDiJF9vzYk",
+            authDomain: "sms-db-7b1c7.firebaseapp.com",
+            databaseURL: "https://sms-db-7b1c7-default-rtdb.firebaseio.com",
+            projectId: "sms-db-7b1c7",
+            storageBucket: "sms-db-7b1c7.appspot.com",
+            messagingSenderId: "848657966289",
+            appId: "1:848657966289:web:3d4ab0afabc6bc9b57d1f0"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Login function
+        async function loginWithEmail(email, password) {
+            return signInWithEmailAndPassword(auth, email, password);
+        }
+
+        // Handle login form submit
+        const loginForm = document.getElementById('loginForm');
+        const errorDiv = document.getElementById('errorMessage');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+
+            try {
+                errorDiv.textContent = '';
+                await loginWithEmail(email, password);
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                // Handle common Firebase auth errors more clearly
+                switch (error.code) {
+                    case 'auth/invalid-email':
+                        errorDiv.textContent = 'Invalid email format.';
+                        break;
+                    case 'auth/user-not-found':
+                        errorDiv.textContent = 'No account found for this email.';
+                        break;
+                    case 'auth/wrong-password':
+                        errorDiv.textContent = 'Incorrect password.';
+                        break;
+                    default:
+                        errorDiv.textContent = error.message;
+                }
+            }
+        });
+
+        // Redirect logged-in users automatically
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+<script type="module">
+  import { checkAuth } from './auth.js';
+
+  // Ensure user is logged in
+  checkAuth().then(user => {
+    console.log("User authenticated:", user.email);
+  }).catch(err => {
+    console.warn("Access blocked:", err);
+  });
+</script>
+</body>
+</html>

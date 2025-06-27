@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <link rel="icon" type="image/x-icon" href="images/logo.png">
+ <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat-Room - Sickbay Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head> <script type="module" src="authGuard.js"></script>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="images/logo.png" width="50" height="50">
+                <span>Sickbay MS</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="students.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Students</span>
+                </a>
+                <a href="prescriptions.html" class="nav-item">
+                    <i class="fas fa-prescription-bottle-alt"></i>
+                    <span>Prescriptions</span>
+                </a>
+                <a href="stocks.html" class="nav-item">
+                    <i class="fas fa-boxes"></i>
+                    <span>Stock Management</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="notes.html" class="nav-item">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>Notes</span>
+                    <a href="chat bot.html" class="nav-item">
+                    <i class="fas fa-robot"></i>
+                    <span>The Med Bot</span>
+                </a>
+                <a href="chat.html" class="nav-item active">
+                    <i class="fas fa-envelope"></i>
+                    <span>Chat-Room</span>
+                </a>
+                  <a href="Locater.html" class="nav-item">
+                    <i class="fas fa-map"></i>
+                    <span>GPS</span>
+                </a>
+                <a href="about.html" class="nav-item">
+                    <i class="fa-solid fa-address-card"></i>
+                    <span>About Us</span>
+                </a>
+                <a href="contact us.html" class="nav-item">
+                    <i class="fas fas fa-phone"></i>
+                    <span>Contact Us</span>
+                </a>
+                <a href="#" class="nav-item" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+                </nav>
+        </div>
+
+        <main class="main-content">
+            <header class="header">
+                <!-- <button class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button> -->
+                
+                <div class="page-header">
+                    <h1>The Chat-Room</h1>
+                    <!-- <p>Manage student records and health information</p> -->
+                </div>
+
+            </header>
+
+            <div class="content">
+                <div class="students-container">
+                <div class="students-header">
+            <!-- Main Content -->
+            <!-- <div class="main-content" id="main-content"> -->
+                <!-- <div class="container"> -->
+                    <h1> Let's Connect! </h1>
+                </div>
+
+
+                 <iframe width="1000px" height="600px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true" src="https://chatroll.com/embed/chat/the-sms-chat?id=JVutOeZsoNS&platform=html"></iframe> </p>
+                </div>
+                </div>
+            </div>
+
+            <script>
+                (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="iqtc2goyR96FZ1ZinibC1";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+                </script>
+
+            <script>
+                function toggleNav() {
+                document.getElementById("sideNav").classList.toggle("open");
+            }
+            </script>
+
+        </div>
+
+        </div
+
+</body>
+        </html>

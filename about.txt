@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>About Us</title>
+    <style>
+        .about-main {
+            background: #181c22;
+            color: #fff;
+            min-height: 100vh;
+            padding: 0 0 40px 0;
+        }
+        .about-header {
+            text-align: center;
+            margin: 30px 0 10px 0;
+        }
+        .about-header h3 {
+            color: #25cfc9;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .about-header span {
+            color: #bdbdbd;
+            font-size: 1.1rem;
+        }
+        .about-section {
+            background: #222831;
+            border-radius: 10px;
+            padding: 30px 24px;
+            margin: 0 auto 30px auto;
+            max-width: 700px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        }
+        .about-section h2 {
+            color: #00adb5;
+            margin-bottom: 10px;
+        }
+        .about-section img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .team-title {
+            text-align: center;
+            margin: 40px 0 20px 0;
+            color: #25cfc9;
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+        .team-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .team-card {
+            background: #393e46;
+            color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+            padding: 24px 18px;
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.18s;
+        }
+        .team-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 6px 24px rgba(0,173,181,0.13);
+        }
+        .team-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #00adb5;
+            margin-bottom: 14px;
+        }
+        .team-card .member-name {
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: #25cfc9;
+            margin-bottom: 6px;
+        }
+        .team-card .member-role {
+            font-size: 1rem;
+            color: #bdbdbd;
+            margin-bottom: 10px;
+        }
+        .team-card .member-desc {
+            font-size: 0.98rem;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        @media (max-width: 900px) {
+            .team-cards { flex-direction: column; align-items: center; }
+            .team-card { width: 90vw; max-width: 350px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="images/logo.png" width="50" height="50">
+                <span>Sickbay MS</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="students.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Students</span>
+                </a>
+                <a href="prescriptions.html" class="nav-item">
+                    <i class="fas fa-prescription-bottle-alt"></i>
+                    <span>Prescriptions</span>
+                </a>
+                <a href="stocks.html" class="nav-item">
+                    <i class="fas fa-boxes"></i>
+                    <span>Stock Management</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="notes.html" class="nav-item">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>Notes</span>
+                </a>
+                <a href="chat.html" class="nav-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Chat-Room</span>
+                </a>
+                <a href="about.html" class="nav-item active">
+                    <i class="fa-solid fa-address-card"></i>
+                    <span>About Us</span>
+                </a>
+                <a href="contact us.html" class="nav-item">
+                    <i class="fas fas fa-phone"></i>
+                    <span>Contact Us</span>
+                </a>
+                <a href="#" class="nav-item" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </div>
+        <main class="main-content about-main">
+            <header class="header">
+                <img class="icon" src="images/Leaf 2.png">
+                <div class="page-header">
+                    <h3>About Us - Envisage</h3>
+                </div>
+            </header>
+            <div class="about-header">
+                <h3>About Us</h3>
+                <span>Envisage - Ndejje SSS Senior Four ICT Students</span>
+            </div>
+            <section class="about-section">
+                <img src="images/logo.png" alt="logo">
+                <h2>Envisage</h2>
+                <div>
+                    Envisage is a group of dedicated Senior Four ICT Students committed to reducing the environmental impact of
+                    electronic waste. We are located in Ndejje Senior Secondary School Uganda and we provide information on 
+                    responsible e-waste disposal, recycling options, and the latest trends in sustainable technology. Our goal is
+                    to empower individuals and organisations to make informed choices and contribute to a greener future.
+                </div>        
+            </section>
+            <div class="team-title">MEET THE TEAM</div>
+            <section class="team-cards">
+                <!-- Example team member card, replace with real info and images -->
+                <div class="team-card">
+                    <img src="images/team/member1.jpg" alt="Member 1">
+                    <div class="member-name">Alice Namutebi</div>
+                    <div class="member-role">Team Leader</div>
+                    <div class="member-desc">Passionate about sustainable tech and leading the team to success.</div>
+                </div>
+                <div class="team-card">
+                    <img src="images/team/member2.jpg" alt="Member 2">
+                    <div class="member-name">Brian Okello</div>
+                    <div class="member-role">Developer</div>
+                    <div class="member-desc">Loves coding and building impactful digital solutions.</div>
+                </div>
+                <div class="team-card">
+                    <img src="images/team/member3.jpg" alt="Member 3">
+                    <div class="member-name">Catherine Aine</div>
+                    <div class="member-role">UI/UX Designer</div>
+                    <div class="member-desc">Designs user-friendly and visually appealing interfaces.</div>
+                </div>
+                <div class="team-card">
+                    <img src="images/team/member4.jpg" alt="Member 4">
+                    <div class="member-name">David Ssemanda</div>
+                    <div class="member-role">Research Lead</div>
+                    <div class="member-desc">Ensures all information is accurate and up-to-date.</div>
+                </div>
+                <div class="team-card">
+                    <img src="images/team/member5.jpg" alt="Member 5">
+                    <div class="member-name">Esther Nakato</div>
+                    <div class="member-role">Content Creator</div>
+                    <div class="member-desc">Writes and curates content for the platform.</div>
+                </div>
+                <div class="team-card">
+                    <img src="images/team/member6.jpg" alt="Member 6">
+                    <div class="member-name">Frank Mugisha</div>
+                    <div class="member-role">Backend Developer</div>
+                    <div class="member-desc">Handles server-side logic and database management.</div>
+                </div>
+                <div class="team-card">
+                    <img src="images/team/member7.jpg" alt="Member 7">
+                    <div class="member-name">Grace Nansubuga</div>
+                    <div class="member-role">QA Specialist</div>
+                    <div class="member-desc">Tests and ensures the quality of all features.</div>
+                </div>
+                <div class="team-card">
+                    <img src="images/team/member8.jpg" alt="Member 8">
+                    <div class="member-name">Henry Kato</div>
+                    <div class="member-role">Support & Outreach</div>
+                    <div class="member-desc">Connects with users and gathers feedback.</div>
+                </div>
+                <div class="team-card">
+                    <img src="images/team/member9.jpg" alt="Member 9">
+                    <div class="member-name">Irene Mbabazi</div>
+                    <div class="member-role">Documentation</div>
+                    <div class="member-desc">Keeps all project documentation organized.</div>
+                </div>
+                <div class="team-card">
+                    <img src="images/team/member10.jpg" alt="Member 10">
+                    <div class="member-name">James Tumusiime</div>
+                    <div class="member-role">Assistant Developer</div>
+                    <div class="member-desc">Assists in coding and troubleshooting issues.</div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="XT4sIf0RblNVHj65UGHeN";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
+</body>
+</html>

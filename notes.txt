@@ -1,0 +1,170 @@
+- Remember to add About Us Page.
+- Update the nav bar; make it scroll able.
+                      update the pages linked there.
+
+Low stock
+Recently added
+All stock
+
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="Z-ZnQL1WY_yT3X05QVZs9";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="x0s3yUjSBZa-d7fk1Ra2C";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="XT4sIf0RblNVHj65UGHeN";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="hpdHBnuYRh4IS6084J4zS";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="Abj4vFUZa2AHY1RiRptL2";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
+<iframe
+    src="https://www.chatbase.co/chatbot-iframe/XT4sIf0RblNVHj65UGHeN"
+    width="100%"
+    style="height: 100%; min-height: 700px"
+    frameborder="0"
+></iframe>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.png"> 
+    <title> Hospitals - SMS </title>
+</head>
+
+<body>
+    <div class="menu-icon" onclick="toggleNav()">&#9776;</div>
+    <div id="sideNav" class="side-nav">
+        <span class="close-btn" onclick="toggleNav()">&times;</span>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="prescriptions.html">Pending Prescriptions</a>
+        <a href="reports.html">Reports</a>
+        <a href="bot.html">The Med-Bot</a>
+        <a href="chat.html">The SMS Chat</a>
+        <a href="hospitals.html">Find a Hospital</a>
+        <a href="admin-dashboard.html"> Dashboard </a>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <div class="main-content" id="main-content">
+        <div class="container">
+            <h1>Find Hospitals Near You!</h1>
+                <div id="map" style="height: 500px;"></div>
+
+    <script src="javascript/hospitals.js"></script>
+    <script>
+        function toggleNav() {
+        document.getElementById("sideNav").classList.toggle("open");
+    }
+    </script>
+
+    </div></div>
+
+  <!-- Chatbot 6-->
+  <script>
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="moB3kOmOROjNpDbTnQZAY";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
+
+    <div class="footer">
+        <p> &copy; Envisage 2025. All Rights Reserved. </p>
+    </div>
+
+
+</body>
+</html>
+
+
+        // Initialize map centered on Uganda
+        const map = L.map('map').setView([1.3733, 32.2903], 7);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Function to fetch hospitals in Uganda
+        const fetchHospitals = () => {
+            const url = 'https://nominatim.openstreetmap.org/search?country=Uganda&amenity=hospital&format=json&limit=50';
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(hospital => {
+                        const lat = parseFloat(hospital.lat);
+                        const lon = parseFloat(hospital.lon);
+                        const name = hospital.display_name || "Hospital";
+
+                        L.marker([lat, lon])
+                            .addTo(map)
+                            .bindPopup(`<strong>${name}</strong>`);
+                    });
+                })
+                .catch(error => console.error('Error fetching hospitals:', error));
+        };
+
+        // Fetch hospitals in Uganda
+        fetchHospitals();
+
+        // Get user's location and search for nearby hospitals
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+
+                // Center map on user's location
+                map.setView([userLat, userLon], 12);
+                
+                // Mark user's location
+                L.marker([userLat, userLon]).addTo(map).bindPopup("You are here").openPopup();
+
+                // Fetch nearby hospitals
+                const fetchNearbyHospitals = () => {
+                    const url = `https://nominatim.openstreetmap.org/search?q=hospital&format=json&limit=50&viewbox=${userLon-0.2},${userLat+0.2},${userLon+0.2},${userLat-0.2}`;
+                    
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(hospital => {
+                                const lat = parseFloat(hospital.lat);
+                                const lon = parseFloat(hospital.lon);
+                                const name = hospital.display_name || "Nearby Hospital";
+
+                                L.marker([lat, lon])
+                                    .addTo(map)
+                                    .bindPopup(`<strong>${name}</strong>`);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching nearby hospitals:', error));
+                };
+
+                fetchNearbyHospitals();
+            });
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }

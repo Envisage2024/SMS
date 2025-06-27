@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Disease Analytics</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .disease-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .disease-btn {
+            background: #00adb5;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 18px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .disease-btn:hover {
+            background: #222831;
+        }
+        .pie-section {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #222831;
+            border-radius: 12px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        }
+        .pie-section h2 {
+            color: #25cfc9;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="images/logo.png" width="50" height="50">
+                <span>Sickbay MS</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="students.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Students</span>
+                </a>
+                <a href="prescriptions.html" class="nav-item">
+                    <i class="fas fa-prescription-bottle-alt"></i>
+                    <span>Prescriptions</span>
+                </a>
+                <a href="stocks.html" class="nav-item">
+                    <i class="fas fa-boxes"></i>
+                    <span>Stock Management</span>
+                </a>
+                <a href="analytics.html" class="nav-item active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="notes.html" class="nav-item">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>Notes</span>
+                </a>
+                <a href="chat.html" class="nav-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Chat-Room</span>
+                </a>
+                 <a href="Locater.html" class="nav-item">
+                  <i class="fas fa-map"></i>
+                  <span>GPS</span>
+                </a>
+                <a href="about.html" class="nav-item">
+                    <i class="fa-solid fa-address-card"></i>
+                    <span>About Us</span>
+                </a>
+                <a href="contact us.html" class="nav-item">
+                    <i class="fas fas fa-phone"></i>
+                    <span>Contact Us</span>
+                </a>
+                <a href="#" class="nav-item" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </div>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="page-header">
+                    <h1>Analytics Dashboard</h1>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- Date Range and Filters -->
+                <div class="analytics-controls">
+                    <div class="date-range-picker">
+                        <label for="startDate">From:</label>
+                        <input type="date" id="startDate" class="date-input">
+                        <label for="endDate">To:</label>
+                        <input type="date" id="endDate" class="date-input">
+                        <button class="btn btn-primary" onclick="loadAnalytics()">
+                            <i class="fas fa-search"></i>
+                            Generate Report
+                        </button>
+                    </div>
+                    <div class="quick-filters">
+                        <button class="filter-btn" onclick="setDateRange('today')">Today</button>
+                        <button class="filter-btn" onclick="setDateRange('week')">This Week</button>
+                        <button class="filter-btn active" onclick="setDateRange('month')">This Month</button>
+                        <button class="filter-btn" onclick="setDateRange('quarter')">This Quarter</button>
+                        <button class="filter-btn" onclick="setDateRange('year')">This Year</button>
+                    </div>
+                </div>
+
+                <!-- Key Metrics Overview -->
+                <div class="metrics-overview">
+                    <div class="metric-card">
+                        <div class="metric-icon visits">
+                            <i class="fas fa-user-injured"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3 id="totalVisits">1283</h3>
+                            <p>Total Visits</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon diseases">
+                            <i class="fas fa-virus"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3 id="uniqueDiseases">12</h3>
+                            <p>Unique Conditions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon medications">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3 id="totalMedications">145</h3>
+                            <p>Medications Dispensed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon recovery">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3 id="recoveryRate">57%</h3>
+                            <p>Recovery Rate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Report Diseases Section -->
+                <div class="report-diseases">
+                    <!-- Ensure the disease buttons container has the correct ID -->
+                    <div class="disease-btns" id="diseaseBtns">
+                        <!-- Placeholder text to verify visibility -->
+                        <p style="color: #fff;">Loading buttons...</p>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-chart-pie"></i> Disease Distribution (Pie Chart)</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="diseasePieChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3><i class="fas fa-chart-bar"></i> Disease Distribution (Bar Chart)</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="diseaseBarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+      <!-- Disease Buttons -->
+      <div class="disease-btns" id="diseaseBtns">
+        <p>Loading buttons...</p>
+      </div>
+
+      <!-- Charts -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3><i class="fas fa-chart-pie"></i> Disease Distribution (Pie Chart)</h3>
+          </div>
+          <canvas id="diseasePieChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3><i class="fas fa-chart-bar"></i> Disease Distribution (Bar Chart)</h3>
+          </div>
+          <canvas id="diseaseBarChart"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      Timestamp
+    } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBPbc82p3XWtzH0X4Ougj9MPeDiJF9vzYk",
+      authDomain: "sms-db-7b1c7.firebaseapp.com",
+      databaseURL: "https://sms-db-7b1c7-default-rtdb.firebaseio.com",
+      projectId: "sms-db-7b1c7",
+      storageBucket: "sms-db-7b1c7.appspot.com",
+      messagingSenderId: "848657966289",
+      appId: "1:848657966289:web:3d4ab0afabc6bc9b57d1f0",
+      measurementId: "G-45LBM5CTZ0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const diseases = [
+      "Malaria", "Flu", "Cough", "Diarrhea", "Typhoid",
+      "Chickenpox", "Ringworm", "Headache", "Stomachache", "Eye Infection", "Other"
+    ];
+
+    const diseaseBtnsDiv = document.getElementById('diseaseBtns');
+    diseaseBtnsDiv.innerHTML = "";
+
+    diseases.forEach(disease => {
+      const btn = document.createElement('button');
+      btn.className = 'disease-btn';
+      btn.textContent = disease;
+      btn.onclick = async () => {
+        let diseaseName = disease;
+        if (disease === "Other") {
+          diseaseName = prompt("Please enter the disease/condition name:");
+          if (!diseaseName) return;
+        }
+        await addDoc(collection(db, "diseaseReports"), {
+          disease: diseaseName,
+          reportedAt: Timestamp.now()
+        });
+        updateCharts();
+      };
+      diseaseBtnsDiv.appendChild(btn);
+    });
+
+    let pieChart, barChart;
+
+    async function updateCharts() {
+      const qSnap = await getDocs(collection(db, "diseaseReports"));
+      const counts = {};
+      qSnap.forEach(doc => {
+        const d = doc.data().disease;
+        counts[d] = (counts[d] || 0) + 1;
+      });
+      const labels = Object.keys(counts);
+      const data = Object.values(counts);
+
+      if (pieChart) pieChart.destroy();
+      const pieCtx = document.getElementById('diseasePieChart').getContext('2d');
+      pieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+          labels,
+          datasets: [{
+            data,
+            backgroundColor: [
+              "#00adb5", "#393e46", "#222831", "#ff9800", "#25cfc9",
+              "#bdbdbd", "#ff6384", "#36a2eb", "#9966ff", "#ffcd56", "#4bc0c0"
+            ]
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: "#fff" }
+            }
+          }
+        }
+      });
+
+      if (barChart) barChart.destroy();
+      const barCtx = document.getElementById('diseaseBarChart').getContext('2d');
+      barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            data,
+            backgroundColor: "#00adb5",
+            borderColor: "#222831",
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            x: { ticks: { color: "#fff" } },
+            y: { ticks: { color: "#fff" } }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    updateCharts();
+  </script>
+</body>
+</html>
